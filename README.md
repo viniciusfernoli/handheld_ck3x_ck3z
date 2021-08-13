@@ -1,0 +1,1 @@
+Este repositório foi criado no intuito de ajuda a configuração de coletores INTERMEC.
