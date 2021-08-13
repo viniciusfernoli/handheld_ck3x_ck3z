@@ -1,0 +1,123 @@
+#Pergunta se o quer configurar o coletor, vai aparecer sim ou não como opcao
+if question "Quer configurar o coletor?", "Configuration"
+    ck3x = 1
+    ck3a = 2
+    ck3r = 3
+#-----------------
+
+#pergunta qual o modelo do coletor, apenas números permitidos, a variavel opt vai receber o valor que digitei
+#o true significa que aceita apenas número no input
+    opt = input("Qual o modelo do coletor, 1-CK3X 2-CK3A 3-CK3R(AUTOSTART)", "Modelo", true)
+#-----------------
+
+#vai descompactar e ainda criar uma pasta chamada script
+    UnzipAll( "\My documents\CONFIG_CK3X_CK3A.zip", "\My Documents\CONFIG_CK3X_CK3A" )
+    MkDir("\Flash File Store\Script")
+#-----------------
+
+#se a variavel opt for igual ao ck3x, vai fazer este bloco de codigo
+    if (opt = ck3x)
+#-----------------
+#vai fazer todos os procedimentos como, copiar os arquivos para a pasta específica e
+#também vai sobrescrever todos os arquivos repetidos, e também criar atalhos.
+        sleepmessage(2, "Escolheu CK3x", "CK3x")
+        XCopy( "\My documents\CONFIG_CK3X_CK3A\*.cab", "\Flash File Store\CABFILES", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\settings.xml", "\SmartSystems\SSconfigDir", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\REMOVEAPPS_CK3X\autouser.dat", "\Flash File Store\Script", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\REMOVEAPPS_CK3X\autouser.dat", "\Flash File Store\2577", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\settings.xml", "\Flash File Store\Script", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\deletefiles.mortrun", "\Flash File Store\Script", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\script.mortrun", "\Flash File Store\Script", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\MortScript.exe", "\Flash File Store\Script", true)
+        XCopy( "\My documents\CONFIG_CK3X_CK3A\*.cab", "\Flash File Store\Script", true)
+        #cria um atalho, que vai deletar sempre os arquivos temporários
+        CreateShortcut("\Windows\StartUp\Del Arquivos temp.lnk", "\My documents\CONFIG_CK3X_CK3A\deletefiles.mortrun", true)
+#-----------------
+#se a pasta sspb existir, vai fazer este bloco, copiando o arquivo pra dentro da pasta.
+        if (DirExists("\Flash File Store\sspb"))
+            XCopy("\My documents\CONFIG_CK3X_CK3A\script.lnk", "\Flash File Store\sspb", true)
+            sleepmessage(3, "Copiando script.lnk para sspb")
+#-----------------
+#se a pasta não existir, vai criar a pasta e copiar o arquivo pra dentro dela.
+        else
+            #cria uma pasta chamada sspb
+            MkDir("\Flash File Store\sspb")
+            XCopy("\My documents\CONFIG_CK3X_CK3A\script.lnk", "\Flash File Store\sspb", true)
+            sleepmessage (3, "Foi Copiado o script.lnk para sspb e tambem criada a pasta")
+        endif
+        sleepmessage(15, "Espere para Reiniciar")
+        Reset
+#-----------------
+#se o modelo do coletor for ck3a, vai fazer o bloco de código abaixo
+#e também criar atalhos e copiar todos os arquivos para a pasta específica
+    elseif(opt = CK3a)
+        #mostra uma mensagem que dura 2 segundos
+        sleepmessage(2, "Escolheu CK3a", "CK3a")
+        #faz a tarefa de copiar os arquivos
+        XCopy("\My documents\CONFIG_CK3X_CK3A\*.cab", "\Flash File Store\CABFILES", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\*.cab", "\CabFiles")
+        XCopy("\My documents\CONFIG_CK3X_CK3A\settings.xml", "\SmartSystems\SSconfigDir", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\REMOVEAPPS_CK3A1\autoexec.dat", "\2577", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\REMOVEAPPS_CK3A1\autoexec.dat", "\Flash File Store\Script", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\settings.xml", "\Flash File Store\Script", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\deletefiles.mortrun", "\Flash File Store\Script", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\script.mortrun", "\Flash File Store\Script", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\MortScript.exe", "\Flash File Store\Script", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\*.cab", "\Flash File Store\Script", true)
+        ##cria um atalho, que vai deletar sempre os arquivos temporários
+        CreateShortcut("\Windows\StartUp\Del Arquivos temp.lnk", "\My documents\CONFIG_CK3X_CK3A\deletefiles.mortrun")
+#-----------------
+#se a pasta sspb existir vai fazer este bloco abaixo
+        if (DirExists("\Flash File Store\sspb"))
+            XCopy("\My documents\CONFIG_CK3X_CK3A\script.lnk", "\Flash File Store\sspb", true)
+            sleepmessage(3, "Copiando script.lnk para sspb")
+#-----------------
+#se a pasta sspb não existir vai criar a pasta e fazer este código abaixo
+        else
+            MkDir("\Flash File Store\sspb")
+            XCopy("\My documents\CONFIG_CK3X_CK3A\script.lnk", "\Flash File Store\sspb", true)
+            sleepmessage (3, "Foi Copiado o script.lnk para sspb e tambem criada a pasta")
+        endif
+        #mostra uma mensagem durante 15 segundos
+        sleepmessage(15, "Espere para Reiniciar")
+        Reset
+#-----------------
+
+#se o modelo escolhido for ck3r
+    elseif(opt = ck3r)
+        sleepmessage(2, "Escolheu CK3r", "CK3r")
+        XCopy( "\My documents\CONFIG_CK3X_CK3A\*.cab", "\Flash File Store\CABFILES", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\autostart\settings.xml", "\SmartSystems\SSconfigDir", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\REMOVEAPPS_CK3X\autouser.dat", "\Flash File Store\2577", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\REMOVEAPPS_CK3X\autouser.dat", "\Flash File Store\Script", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\autostart\settings.xml", "\Flash File Store\Script", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\deletefiles.mortrun", "\Flash File Store\Script", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\script.mortrun", "\Flash File Store\Script", true)
+        XCopy("\My documents\CONFIG_CK3X_CK3A\MortScript.exe", "\Flash File Store\Script", true)
+        XCopy( "\My documents\CONFIG_CK3X_CK3A\*.cab", "\Flash File Store\Script", true)
+        #cria um atalho, que vai deletar sempre os arquivos temporários
+        CreateShortcut("\Windows\StartUp\Del Arquivos temp.lnk", "\My documents\CONFIG_CK3X_CK3A\deletefiles.mortrun", true)
+#-----------------
+#se a pasta sspb existir, vai fazer este bloco, copiando o arquivo pra dentro da pasta.
+        if (DirExists("\Flash File Store\sspb"))
+            XCopy("\My documents\CONFIG_CK3X_CK3A\script.lnk", "\Flash File Store\sspb", true)
+            sleepmessage(3, "Copiando script.lnk para sspb")
+#-----------------
+#se a pasta não existir, vai criar a pasta e copiar o arquivo pra dentro dela.
+        else
+            #cria uma pasta chamada sspb
+            MkDir("\Flash File Store\sspb")
+            XCopy("\My documents\CONFIG_CK3X_CK3A\script.lnk", "\Flash File Store\sspb", true)
+            sleepmessage (3, "Foi Copiado o script.lnk para sspb e tambem criada a pasta")
+        endif
+        sleepmessage(15, "Espere para Reiniciar")
+        Reset
+#-----------------
+
+#Se a variavel input receber um valor diferente de 1 ou 2
+#vai aparecer OPÇÃO INCORRETA NA TELA
+    else
+        Message("OPCAO INCORRETA", "ERRO!!!")
+    endif
+
+endif
