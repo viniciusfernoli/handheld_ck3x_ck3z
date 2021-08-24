@@ -1,1 +1,1 @@
-# Este repositório foi criado no intuito de ajuda a configuração de coletores INTERMEC.
+# Creating script to helping the configure handheld Intermec CK3X and CK3Z
